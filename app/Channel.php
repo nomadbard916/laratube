@@ -27,6 +27,20 @@ class Channel extends Model implements HasMedia
         return null;
     }
 
+    /**
+     *
+     * Check if a user is authorized to edit this model instance
+     *
+     * @return boolean
+     *
+     */
+    public function editable()
+    {
+        if (!auth()->check()) return false;
+
+        return $this->user_id === auth()->user()->id;
+    }
+
     public function registerMediaConversions(?Media $media = null)
     {
         $this->addMediaConversion('thumb')

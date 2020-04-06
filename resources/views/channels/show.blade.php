@@ -10,13 +10,16 @@
                 </div>
 
                 <div class="card-body">
+                    @if($channel->editable())
                     <form id="update-channel-form" action="{{ route('channels.update', $channel->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
+                        @endif
 
                         <div class="form-group row justify-content-center">
                             <div class="channel-avatar">
+                                @if($channel->editable())
                                 <div onclick="document.getElementById('image').click()" class="channel-avatar-overlay">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                         version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 60 60"
@@ -44,10 +47,21 @@
                                         </g>
                                     </svg>
                                 </div>
+                                @endif
                                 <img src="{{ $channel->image() }}" alt="">
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <h4 class="text-center">
+                                {{ $channel->name }}
+                            </h4>
+                            <p class="text-center">
+                                {{ $channel->description }}
+                            </p>
+                        </div>
+
+                        @if($channel->editable())
                         <input onchange="document.getElementById('update-channel-form').submit()" style="display: none;"
                             id="image" type="file" name="image">
 
@@ -66,10 +80,24 @@
                                 class="form-control">{{ $channel->description }}</textarea>
                         </div>
 
+                        @if($errors->any())
+                        <ul class="list-group mb-5">
+                            @foreach($errors->all() as $error)
+                            <li class="text-danger list-group-item">
+                                {{ $error }}
+                            </li>
+                            @endforeach
+                        </ul>
+                        @endif
+
                         <button type="submit" class="btn btn-info">
                             Update Channel
                         </button>
+                        @endif
+
+                        @if($channel->editable())
                     </form>
+                    @endif
                 </div>
             </div>
         </div>
