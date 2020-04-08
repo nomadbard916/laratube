@@ -6,6 +6,10 @@
 
 require('./bootstrap');
 
+window.Vue = require('vue')
+
+require('./components/subscribe-button')
+
 
 /**
  * The following block of code may be used to automatically register your
