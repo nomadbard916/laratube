@@ -11,7 +11,9 @@ Vue.component('channel-uploads', {
     return {
       selected: false,
       videos: [],
-      progress: []
+      progress: {},
+      uploads: [],
+      intervals: {}
     }
   },
   methods: {
@@ -34,8 +36,37 @@ Vue.component('channel-uploads', {
 
             this.$forceUpdate()
           }
+        }).then(({ data }) => {
+          this.uploads = [
+            ...this.uploads,
+            data
+          ]
         })
+
       })
+
+      axios.all(uploaders)
+        .then(() => {
+          this.videos = this.uploads
+
+          this.videos.forEach(video => {
+            this.intervals[video.id] = setInterval(() => {
+              axios.get(`/videos/${video.id}`).then(({ data }) => {
+                if (data.percentage === 100) {
+                  clearInterval((this.intervals[video.id]))
+                }
+
+                this.videos = this.videos.map(v => {
+                  if (v.id === dta.id) {
+                    return data
+                  }
+
+                  return v
+                })
+              })
+            }, 3000)
+          });
+        })
     }
   },
 })
