@@ -49,6 +49,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function toggleVote($entity, $type)
+    {
+        $vote = $entity->votes->where('user_id', $this->id)->first();
+
+        if ($vote) {
+            $vote->update([
+                'type' => $type
+            ]);
+
+            return $vote->refresh();
+        } else {
+            return $entity->votes()->create([
+                'type' => $type,
+                'user_id' => $this->id
+            ]);
+        }
+    }
+
     public function channel()
     {
         return $this->hasOne(Channel::class);
