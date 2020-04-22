@@ -2,7 +2,7 @@
 
 namespace Laratube;
 
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
 class Vote extends Model
 {
