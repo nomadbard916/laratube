@@ -12,6 +12,7 @@ Vue.config.ignoredElements = [
     'video-js'
 ]
 Vue.component('votes', require('./components/votes.vue').default)
+Vue.component('comments', require('./components/comments.vue').default)
 Vue.component('./components/subscribe-button', require('./components/subscribe-button').default)
 require('./components/channel-upload')
 
