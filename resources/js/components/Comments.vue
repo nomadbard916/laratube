@@ -17,6 +17,11 @@
           {{ comment.body }}
         </small>
 
+        <votes
+          :default_votes="comment.votes"
+          :entity_id="comment.id"
+          :entity_owner="comment.user.id"
+        ></votes>
         <replies :comment="comment"></replies>
       </div>
     </div>

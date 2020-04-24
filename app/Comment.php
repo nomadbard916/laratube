@@ -5,9 +5,13 @@ namespace Laratube;
 
 class Comment extends Model
 {
-    protected $with = ['user'];
+    protected $with = ['user', 'votes'];
     protected $appends = ['repliesCount'];
 
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'voteable');
+    }
 
     public function video()
     {
