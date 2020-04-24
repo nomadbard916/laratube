@@ -3,6 +3,7 @@
 namespace Laratube;
 
 use Laratube\Channel;
+use Laratube\Comment;
 
 
 class Video extends Model
@@ -20,5 +21,11 @@ class Video extends Model
     public function votes()
     {
         return $this->morphMany(Vote::class, 'voteable');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)
+            ->whereNull('comment_id')->orderByDesc('created_at');
     }
 }

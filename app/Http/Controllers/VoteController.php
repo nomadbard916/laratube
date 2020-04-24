@@ -20,7 +20,7 @@ class VoteController extends Controller
     {
         $video = Video::find($entityId);
 
-        if ($video = Video::find($entityId);) {
+        if ($video = Video::find($entityId)) {
             return $video;
         }
 
@@ -29,6 +29,5 @@ class VoteController extends Controller
         }
 
         throw new ModelNotFoundException("Entity not found");
-
     }
 }
