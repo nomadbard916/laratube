@@ -1,0 +1,19 @@
+{
+  "lang": "en",
+  "default": {
+    "template": "component",
+    "name": "component",
+    "path": "/src/components/"
+  },
+  "lists": {
+    "template": true,
+    "path": [],
+    "name": [
+      "comment"
+    ]
+  },
+  "templates": {
+    "global": [],
+    "local": []
+  }
+}
