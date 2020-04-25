@@ -14,6 +14,7 @@
     <Comment
       v-for="comment in comments.data"
       :key="comment.id"
+      :video="video"
       :comment="comment"
     />
 
